@@ -1,18 +1,44 @@
 module.exports = {
   get: (req, res) => {
     //todo
-    console.log("hello from get");
+    Todo.findAll({})
+      .then( data => {
+        res.status(200).send(data);
+      })
+      .catch(err => console.log(err));
+    // console.log("hello from get");
   },
   post: (req, res) => {
-    //todo
-    console.log("hello from post");
+    var { name } = req.body;
+    Todo.create({
+      name
+    })
+      .then( data => {
+        res.status(201).send(data)
+      })
+      .catch( err => console.log(err))
+    // console.log("hello from post");
   },
   update: (req, res) => {
     //todo
-    console.log("hello from update");
+    Todo.update({
+      name: req.body.newName,
+    }, { where: { id: req.params.id} })
+      .then( data => {
+        res.status(202).send('updated!');
+      })
+      .catch( err => console.log(err));
+      
+    // console.log("hello from update");
   },
   delete: (req, res) => {
-    //todo
-    console.log("hello from delete");
+    Todo.destroy({
+      where: {id: req.params.id}
+    })
+      .then( data => {
+        res.status(200).send('deleted')
+      })
+      .catch(err => console.log(err));
+    // console.log("hello from delete");
   }
 };

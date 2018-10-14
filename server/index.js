@@ -4,12 +4,12 @@ const bodyParser = require("body-parser");
 const cors = require("cors");
 const morgan = require("morgan");
 
-// const connection = require('../database/');
+const connection = require('../database/');
 const router = require("./router");
 
 const server = express();
 
-const port = 3000;
+const port = 3306;
 
 server.use(cors());
 server.use(morgan("dev"));
